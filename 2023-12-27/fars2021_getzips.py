@@ -3,7 +3,7 @@ import zipfile
 import io
 
 DATADIR = './data'
-for year in range(2010, 2022):
+for year in range(2012, 2022):
     filename = f'FARS{year}NationalCSV.zip'
     directory = f'FARS/{year}/National'
     url = f'https://static.nhtsa.gov/nhtsa/downloads/{directory}/{filename}'

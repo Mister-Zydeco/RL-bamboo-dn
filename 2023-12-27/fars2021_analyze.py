@@ -19,7 +19,7 @@ all_pedestrian_cases = all_person_cases.query('PER_TYP == 5')
 
 all_ped_accident_cases = pd.merge(all_pedestrian_cases, all_accident_cases,
                                  on=case_id_fields)
-years = list(range(2010, 2022))
+years = list(range(2012, 2022))
 
 def count_unique(df, fields):
     return df.drop_duplicates(fields).shape[0]
@@ -57,7 +57,7 @@ ped_freq_df['PCT_PED_ACCIDENTS'] = (
 
 print(ped_freq_df.to_string(index=False))
 
-years_st = [str(yr) for yr in range(2010, 2022)]
+years_st = [str(yr) for yr in range(2012, 2022)]
 accident_counts = {
     'Accidents with pedestrians': ped_freq_df['PED_ACCIDENTS'].to_numpy(),
     'All accidents': ped_freq_df['TOTAL_ACCIDENTS'].to_numpy()
@@ -69,7 +69,7 @@ for acc_type, acc_count in accident_counts.items():
     p = ax1.bar(years_st, acc_count, label=acc_type, bottom=bottom)
     bottom += acc_count
 
-ax1.set_title('Pedestrian-involved accidents 2010-2021')
+ax1.set_title('Pedestrian-involved accidents 2012-2021')
 ax1.legend(loc='upper left')
 
 ax2.set_title((
@@ -104,7 +104,7 @@ pie = ax3.pie(
 ax3.axis('equal')
 ax3.set_title(
     ('Breakdown of lighting conditions\n'
-    'pedestrian-involved accidents 2010-2021'),
+    'pedestrian-involved accidents 2012-2021'),
     loc='left'
 )
 
