@@ -3,7 +3,7 @@ import io
 import pandas as pd
 import pickle
 
-df = pd.read_csv('data/states.csv')
+df = pd.read_csv('./states.csv')
 print(df.to_string())
 print(type(df['Abbreviation']))
 state_abbrevs = df['Abbreviation'].tolist()

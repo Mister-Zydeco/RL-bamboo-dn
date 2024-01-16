@@ -17,6 +17,7 @@ for filename in glob.glob('data/*.csv'):
                   inplace=True, copy=False)
     dfs.append(df)
 nmw_df = pd.concat(dfs, ignore_index=True)
+nmw_df = nmw_df.set_index(['STATE', 'DATE'])
 with open('data/nmw.pickle', 'wb') as fh:
     pickle.dump(nmw_df, fh)
 with open('data/states.pickle', 'wb') as fh:

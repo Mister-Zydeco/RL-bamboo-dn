@@ -10,21 +10,21 @@ with open('data/nmw.pickle', 'rb') as fh:
     nmw_df = pickle.load(fh)
 
 
-nmw_df = nmw_df.set_index(['STATE', 'DATE'])
-    
 present_states = nmw_df.index.unique('STATE').values
 absent_states = states_df[~states_df['Abbreviation'].isin(present_states)]
 print(absent_states.to_string())
 
 
-nmw_gb = nmw_df.groupby(level=0, as_index=False)
+nmw_gb = nmw_df.groupby(level='STATE', as_index=False)
 earliest_reports = nmw_gb.nth(0).sort_index(
     level='DATE', ascending=False)
 print(earliest_reports.info())
 print(earliest_reports.to_string())
 
-nmw2324_df = nmw_gb.nth[-2:].unstack().iloc[:, 0:2].T.reset_index(
-    drop=True).T.sort_values('STATE').dropna(how='any')
+nmw2324_df = nmw_gb.nth[-2:].unstack()
+nmw2324_df.columns = [str(x[1].year) for x in nmw2324_df.columns]
+nmw2324_df = nmw2324_df.loc[:, ['2023', '2024']].sort_values(
+                'STATE').dropna(how='any')
 nmw2324_df.columns = ['2023', '2024']
 nmw2324_df['DIFF'] = nmw2324_df['2024'] - nmw2324_df['2023']
 nmw2324_df = nmw2324_df[nmw2324_df['DIFF'] > 0]
