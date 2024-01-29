@@ -10,6 +10,16 @@ print('Completed imports...')
 
 plt.rcParams['font.size'] = 8
 plt.rcParams['legend.loc'] = 'right'
+plt.rcParams['figure.titlesize'] = 'x-small'
+
+def axes_new_pos(ax):
+    pos = ax.get_position()
+    width, height = 0.8 * (pos.x1 - pos.x0), pos.y1 - pos.y0
+    return [pos.x0, pos.y0, width, height]
+
+def make_intl_title(st):
+    return f'{st}:\nU.S., Great Britain,\nGermany, and France'
+
 prefix = 'https://stats.oecd.org/sdmx-json/data/DP_LIVE'
 suffix = (
     '.../OECD?contentType=csv&detail=code'
@@ -45,13 +55,13 @@ un_df = dfs['unemployment']
 countries = ["USA", "FRA", "DEU", "GBR"]
 qstring = '(FREQUENCY == "A") & (LOCATION == "USA") & (SUBJECT == "TOT")'
     
-fig = plt.figure(layout='constrained')
-gs = fig.add_gridspec(19, 8)
-us_unemp_ax = fig.add_subplot(gs[0:2, 1:6]) 
-int_unemp_ax = fig.add_subplot(gs[4:6, 1:6]) 
-cpi_ax = fig.add_subplot(gs[8:10, 1:6]) 
-cpiq_ax = fig.add_subplot(gs[11:13, 1:6])
-gdp_unemp_22_ax = fig.add_subplot(gs[15:18, 1:6])
+fig = plt.figure(layout='constrained', figsize=(8.5, 10))
+gs = fig.add_gridspec(4, 2, hspace=0.8, wspace=0.6)
+us_unemp_ax = fig.add_subplot(gs[0, 0]) 
+int_unemp_ax = fig.add_subplot(gs[0, 1]) 
+cpi_ax = fig.add_subplot(gs[1, 0]) 
+cpiq_ax = fig.add_subplot(gs[1, 1])
+gdp_unemp_22_ax = fig.add_subplot(gs[2:3, :])
 
 
 df = un_df.reset_index(drop=True).query(qstring).loc[:, ['TIME', 'Value']]
@@ -63,33 +73,40 @@ us_unemp_ax.xaxis.set_ticks(
 )
 us_unemp_ax.set(xlabel='Year', ylabel='% US unemp.')
 us_unemp_ax.set_title('U.S. annual unemployment')
+print('us_unemp')
 
 qstring2 = (
     '(FREQUENCY == "A") & (LOCATION in @countries) & (SUBJECT == "TOT")'
 )
+fs = ['FREQUENCY', 'SUBJECT']
 cols = ['TIME', 'LOCATION', 'Value']
-int_df = un_df.reset_index(drop=True).query(qstring2).loc[:, cols]
+int_df = un_df.query(qstring2).loc[:, cols]
+int_df = int_df.query('"1995" <= TIME <= "2022"').sort_values(by=['TIME'])
 
-int_df = int_df.sort_values('TIME')
-int_df['TIME'] = (
-    pd.to_numeric(int_df['TIME']).apply(lambda x: f'{x % 100:02d}')
-)
+
+#int_df['TIME'] = (
+#    pd.to_numeric(int_df['TIME']).apply(lambda x: f'{x % 100:02d}')
+#)
 int_df = int_df.rename({'LOCATION': 'Country'}, axis=1)
 sns.lineplot(
     data=int_df, x='TIME', y='Value', hue='Country', ax=int_unemp_ax
 )
-int_unemp_ax.xaxis.set_ticks(
-    [x for x in int_df['TIME'].values if x[-1] in list('05')]
-)
-int_unemp_ax.set(xlabel='Year', ylabel='% unemp.')
-int_unemp_ax.set_title(
-    'Annual unemployment:\n'
-    'U.S., Great Britain,\n'
-    'Germany, and France'
-)
-int_unemp_ax.set(xlabel='Year', ylabel='% unemp.')
+tickvals=[x for x in int_df['TIME'].values if x[-1] in list('05')]
+ticklabels = [x[-2:] for x in tickvals]
+minortickvals=[x for x in int_df['TIME'].values if x[-1] not in list('05')]
 
-qstring3 = f'{qstring2} &(MEASURE == "AGRWTH")'
+int_unemp_ax.xaxis.set_ticks(tickvals, labels=ticklabels)
+int_unemp_ax.xaxis.set_ticks(minortickvals, minor=True)
+int_unemp_ax.set(
+    xlabel='Year', ylabel='% unemp.',
+    position=axes_new_pos(int_unemp_ax),
+    title=make_intl_title('Annual unemployment')
+)
+int_unemp_ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1.2))
+fig.legend(handles=[int_unemp_ax], loc="center")
+print('int_unemp')
+
+qstring3 = f'{qstring2} & (MEASURE == "AGRWTH")'
 cpi_df = (
     dfs['cpi'].query(qstring3).loc[:, cols].set_index(['TIME', 'LOCATION'])
     .groupby(level='LOCATION').pct_change().unstack('LOCATION')
@@ -101,14 +118,14 @@ sns.lineplot(
     x='TIME', y='value', hue='Country',
     data=melted_cpi_df, ax=cpi_ax
 )
-cpi_ax.xaxis.set_ticks([x for x in cpi_df['TIME'].values
-                    if x[-1] in list('05')])
-cpi_ax.set(xlabel='Year', ylabel='CPI Delta')
-cpi_ax.set_title(
-    'Annual CPI delta:\n'
-    'U.S., Great Britain,\n'
-    'Germany, and France'
+cpi_ax.xaxis.set_ticks(tickvals, labels=ticklabels)
+cpi_ax.xaxis.set_ticks(minortickvals, minor=True)
+cpi_ax.set(
+    xlabel='Year', ylabel='CPI Delta.', position=axes_new_pos(cpi_ax),
+    title=make_intl_title('Annual CPI Delta')
 )
+cpi_ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1.2))
+print('cpi')
 
 qstring4 = (
     '(FREQUENCY == "Q") & (LOCATION in @countries)'
@@ -129,22 +146,28 @@ cpiq_df['TIME'] = cpiq_df['TIME'].apply(conv)
 melted_cpiq_df = pd.melt(
     cpiq_df, id_vars=['TIME'], var_name='Country'
 )
-xtick_values = [
-    x for x in cpiq_df['TIME'].values
-    if x - int(x) < 0.1 and int(x) % 5 == 0
-]
-xtick_labels = [f'{int(x) % 100:02d}' for x in xtick_values]
-cpiq_ax.set_xticks(xtick_values, labels=xtick_labels)
-cpiq_ax.set(xlabel='Quarter', ylabel='CPI Delta')
 sns.lineplot(
     x='TIME', y='value', hue='Country',
     data=melted_cpiq_df, ax=cpiq_ax
 )
-cpiq_ax.set_title(
-    'Quarterly CPI delta:\n'
-    'U.S., Great Britain,\n'
-    'Germany, and France'
+tickvals = [
+    x for x in cpiq_df['TIME'].values
+    if x - int(x) < 0.1 and int(x) % 10 in [0, 5]
+]
+minortickvals = [
+    x for x in cpiq_df['TIME'].values
+    if x - int(x) < 0.1 and int(x) % 10 not in [0, 5]
+]
+ticklabels = [f'{int(x) % 10:02d}' for x in tickvals]
+cpiq_ax.xaxis.set_ticks(tickvals, labels=ticklabels)
+cpiq_ax.xaxis.set_ticks(minortickvals, minor=True)
+cpiq_ax.set(
+    xlabel='Quarter', ylabel='CPI Delta',
+    position=axes_new_pos(cpiq_ax),
+    title=make_intl_title('Quarterly CPI delta')
 )
+cpiq_ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1.2))
+print('cpiq')
 
 gdp22_df = (
     dfs['gdp']
@@ -172,13 +195,12 @@ sns.scatterplot(
     data=gdp_unemp_22_df, x='GDP', y='Unemployment',
     ax=gdp_unemp_22_ax, hue='Country', legend=False
 )
-gdp_unemp_22_ax.set_title(
-    'Unemployment vs.\n'
-    'per capita GDP, 2022'
+gdp_unemp_22_ax.set(
+    title='Unemployment vs. per capita GDP, 2022',
+    xlabel='Per capita GDP (1000s of USD)', ylabel='% unemp.',
+    position=axes_new_pos(gdp_unemp_22_ax)
 )
-gdp_unemp_22_ax.set_xlabel(
-    'Per capita GDP (1000s of USD)'
-)
+print('gdp_unemp_22')
 
 plt.savefig('plots.png')
 plt.show()
