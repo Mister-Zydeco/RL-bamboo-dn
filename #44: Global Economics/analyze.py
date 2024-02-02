@@ -50,6 +50,13 @@ else:
             dfs[name] = pickle.load(fh)
     print('Completed unpickling...')
 
+def get_ticks(yrs2):
+    major, minor = [], []
+    for ix, x in enumerate(yrs2):
+        ar =  major if x[-1] in list('05') else minor
+        ar.append(ix)
+    return major, minor
+
 
 un_df = dfs['unemployment']
 countries = ["USA", "FRA", "DEU", "GBR"]
@@ -68,9 +75,9 @@ df = un_df.reset_index(drop=True).query(qstring).loc[:, ['TIME', 'Value']]
 df = df.sort_values('TIME')
 df['TIME'] = pd.to_numeric(df['TIME']).apply(lambda x: f'{x % 100:02d}')
 sns.lineplot(data=df, x='TIME', y='Value', ax=us_unemp_ax)
-us_unemp_ax.xaxis.set_ticks(
-    [x for x in df['TIME'].values if x[-1] in list('05')]
-)
+major, minor = get_ticks(df['TIME'].values)
+us_unemp_ax.set_xticks(major)
+us_unemp_ax.set_xticks(minor, minor=True)
 us_unemp_ax.set(xlabel='Year', ylabel='% US unemp.')
 us_unemp_ax.set_title('U.S. annual unemployment')
 print('us_unemp')
@@ -84,26 +91,25 @@ int_df = un_df.query(qstring2).loc[:, cols]
 int_df = int_df.query('"1995" <= TIME <= "2022"').sort_values(by=['TIME'])
 
 
-#int_df['TIME'] = (
-#    pd.to_numeric(int_df['TIME']).apply(lambda x: f'{x % 100:02d}')
-#)
+int_df['TIME'] = (
+    pd.to_numeric(int_df['TIME']).apply(lambda x: f'{x % 100:02d}')
+)
 int_df = int_df.rename({'LOCATION': 'Country'}, axis=1)
 sns.lineplot(
     data=int_df, x='TIME', y='Value', hue='Country', ax=int_unemp_ax
 )
-tickvals=[x for x in int_df['TIME'].values if x[-1] in list('05')]
-ticklabels = [x[-2:] for x in tickvals]
-minortickvals=[x for x in int_df['TIME'].values if x[-1] not in list('05')]
+tickvals = int_df['TIME'].drop_duplicates().values
+major, minor = get_ticks(tickvals)
+ticklabels = [tickvals[x][-2:] for x in major]
 
-int_unemp_ax.xaxis.set_ticks(tickvals, labels=ticklabels)
-int_unemp_ax.xaxis.set_ticks(minortickvals, minor=True)
+int_unemp_ax.set_xticks(major, labels=ticklabels)
+int_unemp_ax.set_xticks(minor, minor=True)
 int_unemp_ax.set(
     xlabel='Year', ylabel='% unemp.',
     position=axes_new_pos(int_unemp_ax),
     title=make_intl_title('Annual unemployment')
 )
 int_unemp_ax.legend(loc='upper left', bbox_to_anchor=(1.05, 1.2))
-fig.legend(handles=[int_unemp_ax], loc="center")
 print('int_unemp')
 
 qstring3 = f'{qstring2} & (MEASURE == "AGRWTH")'
@@ -113,13 +119,19 @@ cpi_df = (
 )
 cpi_df.columns = cpi_df.columns.droplevel().rename(None)
 cpi_df = cpi_df.loc['1995':'2022', :].reset_index()
+cpi_df['TIME'] = (
+    pd.to_numeric(cpi_df['TIME']).apply(lambda x: f'{x % 100:02d}')
+)
 melted_cpi_df = pd.melt(cpi_df, id_vars=['TIME'], var_name='Country')
 sns.lineplot(
     x='TIME', y='value', hue='Country',
     data=melted_cpi_df, ax=cpi_ax
 )
-cpi_ax.xaxis.set_ticks(tickvals, labels=ticklabels)
-cpi_ax.xaxis.set_ticks(minortickvals, minor=True)
+tickvals = melted_cpi_df['TIME'].drop_duplicates().values
+major, minor = get_ticks(tickvals)
+ticklabels = [tickvals[x][-2:] for x in major]
+cpi_ax.set_xticks(major, labels=ticklabels)
+cpi_ax.xaxis.set_ticks(minor, minor=True)
 cpi_ax.set(
     xlabel='Year', ylabel='CPI Delta.', position=axes_new_pos(cpi_ax),
     title=make_intl_title('Annual CPI Delta')
@@ -159,8 +171,8 @@ minortickvals = [
     if x - int(x) < 0.1 and int(x) % 10 not in [0, 5]
 ]
 ticklabels = [f'{int(x) % 10:02d}' for x in tickvals]
-cpiq_ax.xaxis.set_ticks(tickvals, labels=ticklabels)
-cpiq_ax.xaxis.set_ticks(minortickvals, minor=True)
+cpiq_ax.set_xticks(tickvals, labels=ticklabels)
+cpiq_ax.set_xticks(minortickvals, minor=True)
 cpiq_ax.set(
     xlabel='Quarter', ylabel='CPI Delta',
     position=axes_new_pos(cpiq_ax),
