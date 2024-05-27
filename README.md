@@ -1,8 +1,10 @@
-# Repo for DN's work with Reuven Lerner's Bamboo course for learning pandas
-## Organization
-There is a directory for each weekly project: the directory name will have the form **\#\<week number\>:\<topic name\>**.
+# Repo for course project: Reuven Lerner's Bamboo course for learning pandas
 
-## Weekly panda exercise directories
+In this course, every Wednesday Reuven assigns a small investigation of some dataset
+to his subscibers; he provides his solutions the next day. Each box below provides
+links to Reuven's material for one week. This project contains my solutions to each problem
+in a subdirectory named just like the heading in its blue box below.
+
 <style>
 body {
   margin: 40px;
@@ -10,7 +12,7 @@ body {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 18% 18% 18% 18% 18%;
+  grid-template-columns: 23% 23% 23% 23%;
   grid-gap: 1%;
   background-color: #fff;
   color: #444;
@@ -102,6 +104,46 @@ body {
 <div class="box">
 #59: Long COVID<br>
 &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-59-long-covid">&#x2022; Problem statement</a><br>
-&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-58-long-covid-solution">&#x2022; Solution</a><br>
+  <a href="https://www.bambooweekly.com/p/bw-59-long-covid-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#60: Iceland<br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-60-iceland">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-60-iceland-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#61: Solar eclipse<br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-61-solar-eclipse">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-61-solar-eclipse-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#62: Economic report card<br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-62-economic-report-card">&#x2022; Problem statement</a><br>
+ <a href="https://www.bambooweekly.com/p/bw-62-economic-report-card-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#63: Ukraine aid<br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-63-ukraine-aid">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-63-ukraine-aid-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#64: Coal power<br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-64-coal-power">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-64-coal-power-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#65: Microplastics<br>
+ &nbsp;<a href="https://www.bambooweekly.com/p/bw-65-microplastics">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-65-microplastics-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#66: Pittsburgh<br>
+ &nbsp;<a href="https://www.bambooweekly.com/p/bw-66-pittsburgh">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-66-pittsburgh-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#67: Electric cars<br>
+ &nbsp;<a href="https://www.bambooweekly.com/p/bw-67-electric-cars">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-67-electric-cars-solution">&#x2022; Solution</a><br>
 </div>
 </div>
