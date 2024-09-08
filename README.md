@@ -146,4 +146,79 @@ body {
  &nbsp;<a href="https://www.bambooweekly.com/p/bw-67-electric-cars">&#x2022; Problem statement</a><br>
 &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-67-electric-cars-solution">&#x2022; Solution</a><br>
 </div>
+<div class="box">
+#68: Dangerously hot weather<br>
+ &nbsp;<a href="https://www.bambooweekly.com/p/bw-68-dangerously-hot-weather">&#x2022; Problem statement</a><br>
+&nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-68-dangerously-hot-weather-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+#69: Election participation<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-69-election-participation">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-69-election-participation-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #70: Moon missions<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-70-moon-missions">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-70-moon-missions-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #71: Holidays<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-71-holidays">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-71-holidays-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #72: City travel<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-72-city-travel">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-72-city-travel-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #73: Avocado hand<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-73-avocado-hand">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-73-avocado-hand-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #74: UK elections<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-74-uk-elections">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-74-uk-elections-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #75: Refugees<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-75-refugees">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-75-refugees-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #76: Aging legislators<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-76-aging-legislators">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-76-aging-legislators-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #77: Paris Olympics<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-77-paris-olympics">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-77-paris-olympics-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #78: Stock markets<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-78-stock-markets">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-78-stock-markets-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #79: Cyber attacks<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-79-cyber-attacks">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-79-cyber-attacks-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #80: Inflation<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-80-inflation">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-80-inflation-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #81: Inflation<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-81-school">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-81-school-solution">&#x2022; Solution</a><br>
+</div>
+<div class="box">
+  #82: Broadband<br>
+  &nbsp;<a href="https://www.bambooweekly.com/p/bw-82-broadband">&#x2022; Problem statement</a><br>
+  &nbsp;&nbsp;<a href="https://www.bambooweekly.com/p/bw-82-broadband-solution">&#x2022; Solution</a><br>
+</div>
 </div>
